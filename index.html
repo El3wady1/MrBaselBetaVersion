@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>باسم نصار | خبير الإدارة والتسويق وتطوير المنشآت</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a237e;
@@ -23,6 +22,7 @@
             --surface: #ffffff;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 12px;
         }
 
         * {
@@ -60,11 +60,7 @@
             padding: 100px 0;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5 {
+        h1, h2, h3, h4, h5 {
             font-weight: 700;
             line-height: 1.3;
             margin-bottom: 1rem;
@@ -78,13 +74,15 @@
             font-size: 2.5rem;
             position: relative;
             margin-bottom: 3rem;
+            text-align: center;
         }
 
         h2::after {
             content: '';
             position: absolute;
             bottom: -10px;
-            right: 0;
+            right: 50%;
+            transform: translateX(50%);
             width: 80px;
             height: 4px;
             background: linear-gradient(to right, var(--secondary), var(--accent));
@@ -92,8 +90,9 @@
         }
 
         body.english h2::after {
-            left: 0;
+            left: 50%;
             right: auto;
+            transform: translateX(-50%);
         }
 
         h3 {
@@ -119,6 +118,7 @@
             box-shadow: 0 5px 15px rgba(255, 111, 0, 0.3);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .btn:hover {
@@ -141,6 +141,16 @@
 
         .btn:hover::after {
             opacity: 1;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Header Styles */
@@ -207,16 +217,6 @@
             animation: fadeInUp 1s forwards 1.4s;
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid white;
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
         .profile-image-container {
             display: flex;
             justify-content: center;
@@ -229,7 +229,6 @@
             width: 350px;
             height: 350px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-light), var(--accent));
             border: 5px solid rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
@@ -245,15 +244,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .profile-image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--primary-light), var(--accent));
         }
 
         .floating-elements {
@@ -427,7 +417,7 @@
             text-align: center;
             padding: 20px;
             background: var(--background);
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             transition: var(--transition);
         }
@@ -465,7 +455,7 @@
             width: 100%;
             height: 400px;
             background: linear-gradient(135deg, var(--primary-light), var(--accent));
-            border-radius: 20px;
+            border-radius: var(--border-radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -523,7 +513,7 @@
         .timeline-content {
             padding: 20px;
             background: var(--surface);
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             position: relative;
             transition: var(--transition);
@@ -572,7 +562,7 @@
         .skill-category {
             background: var(--surface);
             padding: 30px;
-            border-radius: 15px;
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             transition: var(--transition);
             opacity: 0;
@@ -637,7 +627,7 @@
 
         .course-card {
             background: var(--surface);
-            border-radius: 15px;
+            border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -696,8 +686,6 @@
         }
 
         .vision h2::after {
-            right: 50%;
-            transform: translateX(50%);
             background: linear-gradient(to right, var(--secondary-light), var(--accent));
         }
 
@@ -789,7 +777,7 @@
             width: 100%;
             padding: 15px;
             border: 1px solid #ddd;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             font-family: 'Tajawal', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
@@ -939,7 +927,6 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -950,7 +937,6 @@
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
@@ -960,15 +946,12 @@
             0% {
                 transform: translate(0, 0) rotate(0deg);
             }
-
             33% {
                 transform: translate(30px, -50px) rotate(120deg);
             }
-
             66% {
                 transform: translate(-20px, 20px) rotate(240deg);
             }
-
             100% {
                 transform: translate(0, 0) rotate(360deg);
             }
@@ -978,11 +961,9 @@
             0% {
                 box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
             }
-
             70% {
                 box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
             }
-
             100% {
                 box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
             }
@@ -993,15 +974,12 @@
                 transform: translateY(0) rotate(0deg);
                 opacity: 0;
             }
-
             10% {
                 opacity: 1;
             }
-
             90% {
                 opacity: 1;
             }
-
             100% {
                 transform: translateY(-1000px) rotate(720deg);
                 opacity: 0;
@@ -1010,7 +988,6 @@
 
         /* Responsive Styles */
         @media (max-width: 992px) {
-
             .header-content,
             .about-content,
             .contact-container {
@@ -1155,10 +1132,7 @@
             </div>
             <div class="profile-image-container">
                 <div class="profile-image">
-                    <!-- استبدل هذا العنصر بصورة شخصية -->
-                    <div class="profile-image-placeholder">
-                        <img src="b.png" alt="باسم نصار" width="200%">
-                    </div>
+                    <img src="b.png" alt="باسم نصار">
                 </div>
             </div>
         </div>
