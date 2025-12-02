@@ -1,27 +1,160 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>باسم نصار | خبير الإدارة والتسويق وتطوير المنشآت</title>
+    <title>باسم نصار | خبير إدارة وتطوير المطاعم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+
+        /* أماكن العمل Gallery */
+.workplaces {
+    background: linear-gradient(135deg, #f5f7fa 0%, #f0f5ff 100%);
+}
+
+.workplaces-gallery {
+    padding: 20px 0;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    height: 300px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.gallery-image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top, rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.3));
+    display: flex;
+    align-items: flex-end;
+    padding: 25px;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-text {
+    transform: translateY(20px);
+    transition: var(--transition);
+    width: 100%;
+}
+
+.gallery-item:hover .gallery-text {
+    transform: translateY(0);
+}
+
+.gallery-text h3 {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.gallery-text p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Responsive adjustments for gallery */
+@media (max-width: 1200px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .gallery-item {
+        height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .gallery-item {
+        height: 280px;
+    }
+    
+    .gallery-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(26, 54, 93, 0.9), rgba(26, 54, 93, 0.4));
+    }
+    
+    .gallery-text {
+        transform: translateY(0);
+    }
+}
+        /* CSS Reset and Variables */
         :root {
-            --primary: #1a237e;
-            --primary-dark: #000051;
-            --primary-light: #534bae;
-            --secondary: #ff6f00;
-            --secondary-dark: #c43e00;
-            --secondary-light: #ff9e40;
-            --accent: #00bcd4;
-            --text: #212121;
-            --text-light: #757575;
-            --background: #f5f5f5;
-            --surface: #ffffff;
+            --primary-color: #1a365d;
+            --secondary-color: #d69e2e;
+            --accent-color: #2d7a7c;
+            --light-color: #f8f9fa;
+            --dark-color: #2d3748;
+            --text-color: #333;
+            --text-light: #666;
+            --gradient-primary: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            --gradient-secondary: linear-gradient(135deg, #d69e2e 0%, #ed8936 100%);
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
             --border-radius: 12px;
         }
 
@@ -33,20 +166,16 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--background);
-            color: var(--text);
+            font-family: 'Cairo', 'Tajawal', sans-serif;
             line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f5f7fa;
+            direction: rtl;
             overflow-x: hidden;
-            transition: all 0.3s ease;
-        }
-
-        body.english {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            direction: ltr;
         }
 
         .container {
@@ -56,255 +185,158 @@
             padding: 0 20px;
         }
 
-        section {
-            padding: 100px 0;
-        }
-
-        h1, h2, h3, h4, h5 {
+        /* Typography */
+        h1, h2, h3, h4 {
             font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1rem;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         h2 {
             font-size: 2.5rem;
+            color: var(--primary-color);
             position: relative;
-            margin-bottom: 3rem;
-            text-align: center;
+            display: inline-block;
         }
 
         h2::after {
             content: '';
             position: absolute;
             bottom: -10px;
-            right: 50%;
-            transform: translateX(50%);
-            width: 80px;
+            right: 0;
+            width: 70%;
             height: 4px;
-            background: linear-gradient(to right, var(--secondary), var(--accent));
+            background: var(--gradient-secondary);
             border-radius: 2px;
         }
 
-        body.english h2::after {
-            left: 50%;
-            right: auto;
-            transform: translateX(-50%);
-        }
-
         h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
+            color: var(--dark-color);
         }
 
         p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
         }
 
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            margin: 0 auto 15px;
+        }
+
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Buttons */
         .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-            color: white;
-            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
             border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
             transition: var(--transition);
-            box-shadow: 0 5px 15px rgba(255, 111, 0, 0.3);
+            border: none;
+            outline: none;
             position: relative;
             overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 111, 0, 0.4);
+            gap: 10px;
         }
 
         .btn::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--secondary-light), var(--secondary));
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
             opacity: 0;
-            transition: var(--transition);
-            z-index: -1;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
         }
 
-        .btn:hover::after {
-            opacity: 1;
+        .btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(40, 40);
+                opacity: 0;
+            }
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(26, 54, 93, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(26, 54, 93, 0.4);
         }
 
         .btn-secondary {
             background: transparent;
-            border: 2px solid white;
-            box-shadow: none;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Header Styles */
-        header {
-            min-height: 100vh;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: var(--primary-color);
             color: white;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+            transform: translateY(-5px);
         }
 
-        .header-bg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            background: url("");
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .hero-text {
-            max-width: 800px;
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.5s;
-        }
-
-        .hero-text .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.8s;
-        }
-
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 1.1s;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 1.4s;
-        }
-
-        .profile-image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            animation: fadeIn 1s forwards 1s;
-        }
-
-        .profile-image {
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            border: 5px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 5rem;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .floating-element {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-
-        .floating-element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .floating-element:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            left: 80%;
-            animation-delay: -5s;
-        }
-
-        .floating-element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 80%;
-            left: 20%;
-            animation-delay: -10s;
-        }
-
-        /* Navigation */
-        nav {
+        /* Navbar - Fixed Version */
+        .navbar {
             position: fixed;
             top: 0;
             right: 0;
             width: 100%;
-            background: rgba(26, 35, 126, 0.95);
+            background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             z-index: 1000;
-            padding: 20px 0;
+            padding: 18px 0;
             transition: var(--transition);
         }
 
-        nav.scrolled {
-            padding: 15px 0;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        .navbar.scrolled {
+            padding: 12px 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
         }
 
-        .nav-container {
+        .navbar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -313,1254 +345,1931 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
-            color: white;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .logo span {
-            color: var(--secondary);
+        .logo::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
         }
 
         .nav-links {
             display: flex;
-            list-style: none;
+            align-items: center;
         }
 
         .nav-links li {
-            margin-left: 30px;
+            margin-right: 25px;
+            position: relative;
         }
 
         .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--dark-color);
             position: relative;
-            transition: var(--transition);
+            padding: 5px 0;
+            font-size: 1.05rem;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             right: 0;
             width: 0;
             height: 2px;
-            background: var(--secondary);
+            background: var(--gradient-secondary);
             transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: var(--secondary-light);
-        }
-
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
         }
 
-        /* Language Toggle */
-        .language-toggle {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
+        .lang-switch {
+            margin-right: 15px;
+        }
+
+        .lang-switch button {
+            background: var(--gradient-primary);
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 50px;
             cursor: pointer;
+            font-weight: 600;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-right: 20px;
         }
 
-        .language-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .lang-switch button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(26, 54, 93, 0.3);
         }
 
-        /* About Section */
-        .about {
-            background: var(--surface);
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(26, 54, 93, 0.1);
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(26, 54, 93, 0.2);
+        }
+
+        /* Hero Section - مع الصورة الشخصية */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             position: relative;
+            overflow: hidden;
         }
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231a365d' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            display: flex;
             align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            position: relative;
+            z-index: 1;
         }
 
-        .about-text {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
+        .hero-text {
+            flex: 1;
+            animation: fadeInRight 1s ease-out;
         }
 
-        .about-text.visible {
-            opacity: 1;
-            transform: translateX(0);
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
         }
 
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            margin-bottom: 35px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
             gap: 20px;
             margin-top: 30px;
         }
 
-        .stat {
-            text-align: center;
-            padding: 20px;
-            background: var(--background);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .profile-container {
+            width: 380px;
+            height: 380px;
+            position: relative;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 8px solid white;
+            position: relative;
             transition: var(--transition);
         }
 
-        .stat:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .profile-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            bottom: -8px;
+            left: -8px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+        }
+
+        .profile-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.3) 100%);
+            z-index: 1;
+        }
+
+        /* About Section - مع الصورة الاحترافية */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-secondary);
+        }
+
+        .about-text:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-details {
+            margin-top: 30px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(26, 54, 93, 0.03);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .detail-item:hover {
+            background: rgba(26, 54, 93, 0.08);
+            transform: translateX(-10px);
+        }
+
+        .detail-item i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+
+        .detail-item h3 {
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+        }
+
+        /* About Image Styling */
+        .about-image-container {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .about-image-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .about-image-container:hover .about-image {
+            transform: scale(1.05);
+        }
+
+        .about-image-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(26, 54, 93, 0.8), transparent);
+            padding: 30px;
+            color: white;
+        }
+
+        .about-image-overlay h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .about-image-overlay p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        /* About Stats */
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 25px 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            border-top-color: var(--secondary-color);
+            box-shadow: var(--shadow-lg);
         }
 
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 5px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            line-height: 1;
         }
 
         .stat-text {
-            font-size: 1rem;
-            color: var(--text-light);
-        }
-
-        .about-image {
-            position: relative;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease 0.3s;
-        }
-
-        .about-image.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .image-placeholder {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, var(--primary-light), var(--accent));
-            border-radius: var(--border-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 5rem;
-            box-shadow: var(--shadow);
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 1.1rem;
         }
 
         /* Experience Section */
         .experience {
-            background: var(--background);
-            position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
         }
 
         .timeline {
             position: relative;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .timeline::after {
+        .timeline::before {
             content: '';
             position: absolute;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            right: 50%;
+            transform: translateX(50%);
             top: 0;
             bottom: 0;
-            right: 50%;
-            margin-right: -2px;
+            width: 4px;
+            background: var(--gradient-secondary);
             border-radius: 2px;
         }
 
         .timeline-item {
-            padding: 10px 40px;
+            display: flex;
+            margin-bottom: 50px;
             position: relative;
-            width: 50%;
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .timeline-item.visible {
+        .timeline-item.animate {
             opacity: 1;
             transform: translateY(0);
         }
 
         .timeline-item:nth-child(odd) {
-            right: 0;
+            flex-direction: row-reverse;
         }
 
-        .timeline-item:nth-child(even) {
-            right: 50%;
+        .timeline-date {
+            flex: 0 0 200px;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+            background: white;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            align-self: center;
+            position: relative;
+            z-index: 2;
         }
 
         .timeline-content {
-            padding: 20px;
-            background: var(--surface);
+            flex: 1;
+            background: white;
+            padding: 35px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
+            margin: 0 30px;
             position: relative;
             transition: var(--transition);
         }
 
         .timeline-content:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-lg);
         }
 
-        .timeline-content::after {
+        .timeline-content::before {
             content: '';
             position: absolute;
             width: 20px;
             height: 20px;
+            background: white;
+            transform: rotate(45deg);
+            top: 30px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
             right: -10px;
-            background: var(--surface);
-            top: 20px;
-            border-radius: 50%;
-            z-index: 1;
-            box-shadow: 0 0 0 4px var(--secondary);
         }
 
-        .timeline-item:nth-child(even) .timeline-content::after {
+        .timeline-item:nth-child(odd) .timeline-content::before {
             left: -10px;
-            right: auto;
         }
 
-        .timeline-date {
-            font-weight: bold;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
+        .timeline-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .timeline-content ul {
+            padding-right: 20px;
+        }
+
+        .timeline-content li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-right: 25px;
+        }
+
+        .timeline-content li::before {
+            content: '▸';
+            position: absolute;
+            right: 0;
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+        }
+
+        /* Previous Experience Section */
+        .previous-experience {
+            background: linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%);
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .experience-card {
+            background: white;
+            padding: 35px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .experience-card:hover::before {
+            opacity: 0.02;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .experience-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(214, 158, 46, 0.1);
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .experience-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .experience-card p {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 0;
+            font-size: 1rem;
         }
 
         /* Skills Section */
-        .skills {
-            background: var(--surface);
-        }
-
-        .skills-container {
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .skill-category {
-            background: var(--surface);
-            padding: 30px;
+            background: white;
+            padding: 35px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             transition: var(--transition);
-            opacity: 0;
-            transform: translateY(30px);
+            border-top: 5px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
         }
 
-        .skill-category.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-secondary);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .skill-category:hover::before {
+            transform: translateX(0);
         }
 
         .skill-category:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-lg);
         }
 
         .skill-category h3 {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            color: var(--primary);
+            margin-bottom: 25px;
+            color: var(--primary-color);
         }
 
-        .skill-category h3 i {
-            color: var(--secondary);
+        .skill-category i {
+            margin-left: 12px;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
         }
 
-        .skills-list {
-            list-style: none;
+        .skill-category ul {
+            position: relative;
+            z-index: 2;
         }
 
-        .skills-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+        .skill-category li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             position: relative;
             padding-right: 30px;
+            transition: var(--transition);
         }
 
-        .skills-list li:before {
-            content: '▸';
+        .skill-category li:hover {
+            padding-right: 40px;
+            color: var(--primary-color);
+        }
+
+        .skill-category li::before {
+            content: '✓';
             position: absolute;
             right: 0;
-            color: var(--secondary);
+            color: var(--accent-color);
             font-weight: bold;
+            font-size: 1.1rem;
+            transition: var(--transition);
         }
 
-        .skills-list li:last-child {
-            border-bottom: none;
+        .skill-category li:hover::before {
+            transform: scale(1.3);
         }
 
-        /* Courses Section */
-        .courses {
-            background: var(--background);
-        }
-
-        .courses-grid {
+        /* Projects Section */
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
 
-        .course-card {
-            background: var(--surface);
+        .project-card {
+            background: white;
+            padding: 40px 35px;
             border-radius: var(--border-radius);
-            overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .course-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .course-icon {
-            height: 150px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
         }
 
-        .course-content {
-            padding: 25px;
+        .project-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-secondary);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
 
-        .course-title {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        /* Vision Section */
-        .vision {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            text-align: center;
-        }
-
-        .vision-content {
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .vision-content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .vision h2::after {
-            background: linear-gradient(to right, var(--secondary-light), var(--accent));
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--surface);
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-
-        .contact-info {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
-        }
-
-        .contact-info.visible {
-            opacity: 1;
+        .project-card:hover::after {
             transform: translateX(0);
         }
 
-        .contact-details {
-            margin-top: 30px;
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(45, 122, 124, 0.1);
+            border-radius: 50%;
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .project-card p {
+            flex-grow: 1;
+            margin-bottom: 25px;
+        }
+
+        .project-link {
+            color: var(--primary-color);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .project-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-secondary);
+            transition: var(--transition);
+        }
+
+        .project-link:hover::after {
+            width: 100%;
+        }
+
+        .project-link:hover {
+            gap: 15px;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 25px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
         }
 
         .contact-item {
             display: flex;
-            align-items: center;
-            margin-bottom: 20px;
+            align-items: flex-start;
+            padding: 25px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .contact-item i {
-            width: 50px;
-            height: 50px;
-            background: var(--background);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--accent-color);
             margin-left: 15px;
-            color: var(--primary);
+            margin-top: 5px;
+            min-width: 30px;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
             font-size: 1.2rem;
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
+        .contact-item a {
+            color: var(--text-color);
+            transition: var(--transition);
+            display: inline-block;
+            position: relative;
         }
 
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
+        .contact-item a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-color);
             transition: var(--transition);
         }
 
-        .social-link:hover {
-            background: var(--secondary);
-            transform: translateY(-5px);
+        .contact-item a:hover {
+            color: var(--primary-color);
         }
 
-        .contact-form {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease 0.3s;
-        }
-
-        .contact-form.visible {
-            opacity: 1;
-            transform: translateX(0);
+        .contact-item a:hover::after {
+            width: 100%;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            position: relative;
+            margin-bottom: 35px;
         }
 
-        .form-control {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            font-family: 'Tajawal', sans-serif;
+            padding: 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
             font-size: 1rem;
+            background: transparent;
             transition: var(--transition);
         }
 
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        .form-group label {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: white;
+            padding: 0 8px;
+            color: var(--text-light);
+            transition: var(--transition);
+            pointer-events: none;
         }
 
-        textarea.form-control {
-            min-height: 150px;
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .form-group input:focus + label,
+        .form-group textarea:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -10px;
+            right: 12px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .form-group textarea {
             resize: vertical;
+            min-height: 150px;
         }
 
         /* Footer */
-        footer {
-            background: var(--primary-dark);
+        .footer {
+            background: var(--gradient-primary);
             color: white;
-            padding: 50px 0 20px;
-            text-align: center;
+            padding: 60px 0 30px;
         }
 
         .footer-content {
-            margin-bottom: 30px;
-        }
-
-        .copyright {
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* WhatsApp Floating Button */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 25px;
-            left: 25px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
             text-align: center;
-            font-size: 30px;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            display: flex;
+        }
+
+        .footer-logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: white;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
-            animation: pulse 2s infinite;
+            gap: 15px;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
-        }
-
-        .whatsapp-tooltip {
-            position: absolute;
-            right: 70px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--primary);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .whatsapp-tooltip::after {
+        .footer-logo::before {
             content: '';
-            position: absolute;
-            top: 50%;
-            left: 100%;
-            transform: translateY(-50%);
-            border-width: 5px;
-            border-style: solid;
-            border-color: transparent transparent transparent var(--primary);
-        }
-
-        .whatsapp-float:hover .whatsapp-tooltip {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Scroll to Top Button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
+            display: block;
             width: 50px;
             height: 50px;
-            background: var(--secondary);
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+        }
+
+        .footer-text {
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-8px) scale(1.1);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 55px;
+            height: 55px;
+            background: var(--gradient-secondary);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
+            font-size: 1.3rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
-            z-index: 999;
-            box-shadow: 0 3px 10px rgba(255, 111, 0, 0.3);
         }
 
-        .scroll-to-top.active {
+        .back-to-top.active {
             opacity: 1;
             visibility: visible;
         }
 
-        .scroll-to-top:hover {
-            background: var(--secondary-dark);
-            transform: translateY(-3px);
+        .back-to-top:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(214, 158, 46, 0.4);
         }
 
-        /* Particles Background */
-        .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: particleFloat 20s infinite linear;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            .hero-title { font-size: 3rem; }
+            .profile-container {
+                width: 350px;
+                height: 350px;
             }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            33% {
-                transform: translate(30px, -50px) rotate(120deg);
-            }
-            66% {
-                transform: translate(-20px, 20px) rotate(240deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Responsive Styles */
         @media (max-width: 992px) {
-            .header-content,
-            .about-content,
-            .contact-container {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-content {
                 grid-template-columns: 1fr;
             }
-
-            .timeline::after {
-                right: 31px;
+            
+            .contact-content {
+                grid-template-columns: 1fr;
             }
-
+            
+            .timeline::before {
+                right: 30px;
+            }
+            
             .timeline-item {
-                width: 100%;
-                padding-right: 70px;
-                padding-left: 25px;
+                flex-direction: row;
             }
-
-            .timeline-item:nth-child(even) {
-                right: 0;
+            
+            .timeline-item:nth-child(odd) {
+                flex-direction: row;
             }
-
-            .timeline-content::after {
-                left: -10px;
-                right: auto;
+            
+            .timeline-content::before {
+                right: -10px !important;
+                left: auto !important;
             }
-
-            h1 {
-                font-size: 3rem;
+            
+            .about-image {
+                height: 400px;
             }
-
-            h2 {
-                font-size: 2.2rem;
-            }
-
-            .profile-image {
-                width: 280px;
-                height: 280px;
+            
+            .experience-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                right: 0;
-                width: 100%;
-                background: var(--primary);
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 280px;
                 flex-direction: column;
-                padding: 20px 0;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                background: white;
+                padding: 25px;
+                box-shadow: var(--shadow-lg);
+                border-radius: 0 0 0 var(--border-radius);
+                transition: var(--transition);
+                height: calc(100vh - 80px);
+                overflow-y: auto;
             }
-
+            
             .nav-links.active {
-                display: flex;
+                right: 0;
             }
-
+            
             .nav-links li {
-                margin: 0;
-                text-align: center;
-                padding: 15px 0;
+                margin: 0 0 20px 0;
+                width: 100%;
             }
-
-            .mobile-menu {
-                display: block;
+            
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
-
-            .hero-text h1 {
+            
+            .hero {
+                padding-top: 150px;
+                padding-bottom: 80px;
+            }
+            
+            .hero-title {
                 font-size: 2.5rem;
             }
-
-            .cta-buttons {
-                flex-direction: column;
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
             }
-
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .skills-grid,
+            .projects-grid,
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
             .about-stats {
                 grid-template-columns: 1fr;
             }
+            
+            .about-image {
+                height: 350px;
+            }
+        }
 
-            .profile-image {
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 { font-size: 2.3rem; }
+            h2 { font-size: 2rem; }
+            .hero-title { font-size: 2.2rem; }
+            
+            .about-text,
+            .contact-form,
+            .project-card,
+            .skill-category,
+            .experience-card {
+                padding: 25px;
+            }
+            
+            .timeline-date {
+                flex: 0 0 150px;
+                font-size: 0.9rem;
+            }
+            
+            .timeline-content {
+                margin: 0 15px;
+                padding: 25px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+            
+            .profile-container {
                 width: 250px;
                 height: 250px;
             }
-
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 25px;
-                bottom: 20px;
-                left: 20px;
+            
+            .about-image {
+                height: 300px;
             }
+        }
 
-            .whatsapp-tooltip {
-                display: none;
+        /* Animations */
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
             }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 18px 25px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1001;
+            border-right: 5px solid var(--secondary-color);
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
         }
     </style>
 </head>
-
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="container nav-container">
-            <div class="logo">باسم <span>نصار</span></div>
-            <ul class="nav-links">
-                <li><a href="#about">نبذة عني</a></li>
-                <li><a href="#experience">الخبرات</a></li>
-                <li><a href="#skills">المهارات</a></li>
-                <li><a href="#courses">الدورات</a></li>
-                <li><a href="#vision">الرؤية</a></li>
-                <li><a href="#contact">اتصل بي</a></li>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text"></span>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">باسم نصار</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="#about" class="nav-link" data-ar="نبذة عني" data-en="About">نبذة عني</a></li>
+                <li><a href="#previous-experience" class="nav-link" data-ar="خبرات سابقة" data-en="Previous Experience">خبرات سابقة</a></li>
+                <li><a href="#skills" class="nav-link" data-ar="المهارات" data-en="Skills">المهارات</a></li>
+                <li><a href="#projects" class="nav-link" data-ar="الانجازات" data-en="Achievements">الانجازات</a></li>
+                <li><a href="#contact" class="nav-link" data-ar="التواصل" data-en="Contact">التواصل</a></li>
+                <li class="lang-switch">
+                    <button id="langToggle">
+                        <i class="fas fa-globe"></i>
+                        <span id="langText">EN</span>
+                    </button>
+                </li>
             </ul>
-            <div class="nav-actions">
-                <button class="language-toggle" id="languageToggle">
-                    <i class="fas fa-globe"></i>
-                    <span>English</span>
-                </button>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <!-- Header -->
-    <header>
-        <div class="header-bg"></div>
-        <div class="particles-container" id="particles"></div>
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        <div class="container header-content">
-            <div class="hero-text">
-                <h1 data-ar="باسم نصار" data-en="Bassem Nassar">باسم نصار</h1>
-                <p class="tagline" data-ar="خبير في الإدارة والتسويق وتطوير المنشآت" data-en="Expert in Management, Marketing & Business Development">خبير في الإدارة والتسويق وتطوير المنشآت</p>
-                <p data-ar="أكثر من 20 عامًا من الخبرة المتنوعة في إدارة المطاعم والتسويق. أساعد الشركات على النمو والازدهار من خلال استراتيجيات إدارية وتسويقية مبتكرة." data-en="Over 20 years of diverse experience in restaurant management and marketing. I help companies grow and thrive through innovative management and marketing strategies.">أكثر من 20 عامًا من الخبرة المتنوعة في إدارة المطاعم والتسويق. أساعد الشركات على النمو والازدهار من خلال استراتيجيات إدارية وتسويقية مبتكرة.</p>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn" data-ar="اتصل بي الآن" data-en="Contact Me Now">اتصل بي الآن</a>
-                    <a href="#courses" class="btn btn-secondary" data-ar="استكشف الدورات" data-en="Explore Courses">استكشف الدورات</a>
-                </div>
-            </div>
-            <div class="profile-image-container">
-                <div class="profile-image">
-                    <img src="b.png" alt="باسم نصار">
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- القسم الرئيسي - مع الصورة الشخصية -->
+    <section id="home" class="hero">
         <div class="container">
-            <h2 data-ar="نبذة عني" data-en="About Me">نبذة عني</h2>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title" id="heroTitle" data-ar="باسم نصار" data-en="Bassem Nassar">باسم نصار</h1>
+                    <h2 class="hero-subtitle" id="heroSubtitle" data-ar="خبير إدارة وتطوير المطاعم" data-en="Restaurant Management & Development Expert">خبير إدارة وتطوير المطاعم</h2>
+                    <p class="hero-description" id="heroDescription" data-ar="أكثر من 20 عامًا من الخبرة في إدارة المطاعم، التسويق، والتطوير المؤسسي. أساعد في تحويل الأفكار إلى مشاريع ناجحة وزيادة أرباح المطاعم." data-en="Over 20 years of experience in restaurant management, marketing, and institutional development. I help transform ideas into successful projects and increase restaurant profits.">أكثر من 20 عامًا من الخبرة في إدارة المطاعم، التسويق، والتطوير المؤسسي. أساعد في تحويل الأفكار إلى مشاريع ناجحة وزيادة أرباح المطاعم.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary" id="contactBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-ar="تواصل معي" data-en="Contact Me">تواصل معي</span>
+                        </a>
+                        <a href="#projects" class="btn btn-secondary" id="projectsBtn">
+                            <i class="fas fa-briefcase"></i>
+                            <span data-ar="الانجازات" data-en="Achievements">الانجازات</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-container">
+                        <div class="profile-image">
+                            <img src="./b.png" alt="باسم نصار - خبير إدارة وتطوير المطاعم">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نبذة عني - مع الصورة الاحترافية -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-ar="نبذة عني" data-en="About Me">نبذة عني</h2>
+                <p data-ar="تعرف على مسيرتي المهنية وخبراتي في مجال إدارة وتطوير المطاعم" data-en="Learn about my professional journey and expertise in restaurant management and development">تعرف على مسيرتي المهنية وخبراتي في مجال إدارة وتطوير المطاعم</p>
+            </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p data-ar="أنا باسم نصار، خبير في مجال الإدارة والتسويق وتطوير المنشآت، مع أكثر من 20 عامًا من الخبرة المتنوعة في مجال إدارة المطاعم والتسويق." data-en="I am Bassem Nassar, an expert in management, marketing, and business development, with over 20 years of diverse experience in restaurant management and marketing.">أنا باسم نصار، خبير في مجال الإدارة والتسويق وتطوير المنشآت، مع أكثر من 20 عامًا من الخبرة المتنوعة في مجال إدارة المطاعم والتسويق.</p>
-                    <p data-ar="بدأت رحلتي المهنية في مجال التسويق السياحي أثناء دراستي في مرحلة الثانوية العامة، ومن ثم حصلت على بكالوريوس تجارة من جامعة عين شمس. طوال مسيرتي، تخصصت في إدارة المطاعم والفنادق، حيث عملت في العديد من الأماكن البارزة مثل مطاعم البحر الأحمر وجنوب سيناء، وتخصصت في إدارة المطاعم بفنادق شرم الشيخ." data-en="I started my professional journey in tourism marketing during my high school studies, then obtained a Bachelor of Commerce from Ain Shams University. Throughout my career, I specialized in restaurant and hotel management, working in many prominent places such as Red Sea and South Sinai restaurants, and specializing in restaurant management in Sharm El-Sheikh hotels.">بدأت رحلتي المهنية في مجال التسويق السياحي أثناء دراستي في مرحلة الثانوية العامة، ومن ثم حصلت على بكالوريوس تجارة من جامعة عين شمس. طوال مسيرتي، تخصصت في إدارة المطاعم والفنادق، حيث عملت في العديد من الأماكن البارزة مثل مطاعم البحر الأحمر وجنوب سيناء، وتخصصت في إدارة المطاعم بفنادق شرم الشيخ.</p>
-                    <p data-ar="تجربتي المهنية تشمل العمل كمدير للعديد من المطاعم في القاهرة لمدة تزيد عن 12 عامًا، بما في ذلك مطاعم دار القوات الجوية، وعملت استشاريًا لعدة علامات تجارية. كما حصلت على العديد من الدورات التدريبية في التسويق الإبداعي وإدارة المطاعم والأمن الغذائي." data-en="My professional experience includes working as a manager for many restaurants in Cairo for over 12 years, including Air Force House restaurants, and I have worked as a consultant for several brands. I have also obtained many training courses in creative marketing, restaurant management, and food safety.">تجربتي المهنية تشمل العمل كمدير للعديد من المطاعم في القاهرة لمدة تزيد عن 12 عامًا، بما في ذلك مطاعم دار القوات الجوية، وعملت استشاريًا لعدة علامات تجارية. كما حصلت على العديد من الدورات التدريبية في التسويق الإبداعي وإدارة المطاعم والأمن الغذائي.</p>
-                    <p data-ar="أمضيت سنوات عديدة في مجال تطوير التسويق وإدارة الأزمات، وعملت كمدرب للعاملين في المطاعم، بالإضافة إلى مراقبة الجودة وإدارة المخزون. كما اكتسبت خبرة واسعة في الموارد البشرية وإدارة الرواتب والأجور، بالإضافة إلى بناء مهارات قوية في خدمة العملاء والتواصل الفعال. لدي خبرة أيضًا في تنسيق العلاقات العامة وتنظيم الفعاليات والحفلات الهامة." data-en="I spent many years in marketing development and crisis management, and worked as a trainer for restaurant workers, in addition to quality control and inventory management. I have also gained extensive experience in human resources and payroll management, in addition to building strong skills in customer service and effective communication. I also have experience in coordinating public relations and organizing important events and parties.">أمضيت سنوات عديدة في مجال تطوير التسويق وإدارة الأزمات، وعملت كمدرب للعاملين في المطاعم، بالإضافة إلى مراقبة الجودة وإدارة المخزون. كما اكتسبت خبرة واسعة في الموارد البشرية وإدارة الرواتب والأجور، بالإضافة إلى بناء مهارات قوية في خدمة العملاء والتواصل الفعال. لدي خبرة أيضًا في تنسيق العلاقات العامة وتنظيم الفعاليات والحفلات الهامة.</p>
-                </div>
-                <div class="about-image">
-                    <img src="a.png" alt="باسم نصار" width="100%" height="auto">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 data-ar="الخبرات السابقة البارزة" data-en="Previous Notable Experiences">الخبرات السابقة البارزة</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="مساعد مدير مطعم" data-en="Assistant Restaurant Manager">مساعد مدير مطعم</div>
-                        <h3 data-ar="دار القوات الجوية - القاهرة" data-en="Air Force House - Cairo">دار القوات الجوية - القاهرة</h3>
-                        <p data-ar="الإشراف على العمليات اليومية للمطعم، وضمان تقديم خدمة متميزة للعملاء، بالإضافة إلى تطوير الاستراتيجيات التشغيلية التي ساهمت في تحسين الأداء العام للمطعم." data-en="Supervising the restaurant's daily operations, ensuring excellent customer service, and developing operational strategies that contributed to improving the restaurant's overall performance.">الإشراف على العمليات اليومية للمطعم، وضمان تقديم خدمة متميزة للعملاء، بالإضافة إلى تطوير الاستراتيجيات التشغيلية التي ساهمت في تحسين الأداء العام للمطعم.</p>
+                    <p data-ar="خبير إدارة وتطوير مطاعم مع أكثر من 20 عامًا من الخبرة الشاملة في إدارة وتشغيل وتسويق المطاعم والفنادق. أتمتع بخبرة متنوعة تمتد من الإدارة اليومية إلى الاستشارات الاستراتيجية وتطوير العلامات التجارية. أسعى دائمًا لتحقيق التميز في خدمة العملاء وزيادة الربحية من خلال استراتيجيات مبتكرة." data-en="Restaurant management and development expert with over 20 years of comprehensive experience in managing, operating, and marketing restaurants and hotels. I possess diverse experience ranging from daily management to strategic consulting and brand development. I always strive for excellence in customer service and increased profitability through innovative strategies.">
+                        خبير إدارة وتطوير مطاعم مع أكثر من 20 عامًا من الخبرة الشاملة في إدارة وتشغيل وتسويق المطاعم والفنادق. أتمتع بخبرة متنوعة تمتد من الإدارة اليومية إلى الاستشارات الاستراتيجية وتطوير العلامات التجارية. أسعى دائمًا لتحقيق التميز في خدمة العملاء وزيادة الربحية من خلال استراتيجيات مبتكرة.
+                    </p>
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <h3 data-ar="المؤهلات الأكاديمية" data-en="Academic Qualifications">المؤهلات الأكاديمية</h3>
+                                <p data-ar="بكالوريوس تجارة - جامعة عين شمس، دبلومة إدارة المطاعم" data-en="Bachelor of Commerce - Ain Shams University, Restaurant Management Diploma">بكالوريوس تجارة - جامعة عين شمس، دبلومة إدارة المطاعم</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-certificate"></i>
+                            <div>
+                                <h3 data-ar="الشهادات" data-en="Certifications">الشهادات</h3>
+                                <p data-ar="التسويق الإبداعي، إدارة المطاعم المتقدمة، الأمن الغذائي، تطوير العلامات التجارية" data-en="Creative Marketing, Advanced Restaurant Management, Food Safety, Brand Development">التسويق الإبداعي، إدارة المطاعم المتقدمة، الأمن الغذائي، تطوير العلامات التجارية</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-language"></i>
+                            <div>
+                                <h3 data-ar="اللغات" data-en="Languages">اللغات</h3>
+                                <p data-ar="العربية (اللغة الأم)، الإنجليزية (ممتاز)" data-en="Arabic (Native), English (Excellent)">العربية (اللغة الأم)، الإنجليزية (ممتاز)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-text" data-ar="سنة خبرة" data-en="Years Experience">سنة خبرة</div>
+                        </div>
+                      
+                        <div class="stat-item">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-text" data-ar="علامات تجارية" data-en="Brands Developed">علامات تجارية</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-text" data-ar="متدرب" data-en="Trainees">متدرب</div>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="مدير مطعم" data-en="Restaurant Manager">مدير مطعم</div>
-                        <h3 data-ar="تفانين - القاهرة" data-en="Tafaneen - Cairo">تفانين - القاهرة</h3>
-                        <p data-ar="توليت مسؤولية إدارة وتشغيل مطعم تفانين، حيث عملت على تحسين الأداء التشغيلي وتطوير استراتيجيات التسويق، مما ساعد في زيادة الإقبال على المطعم وتعزيز سمعة العلامة التجارية." data-en="I was responsible for managing and operating Tafaneen restaurant, where I worked to improve operational performance and develop marketing strategies, which helped increase the restaurant's popularity and enhance the brand's reputation.">توليت مسؤولية إدارة وتشغيل مطعم تفانين، حيث عملت على تحسين الأداء التشغيلي وتطوير استراتيجيات التسويق، مما ساعد في زيادة الإقبال على المطعم وتعزيز سمعة العلامة التجارية.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="مدير مطعم" data-en="Restaurant Manager">مدير مطعم</div>
-                        <h3 data-ar="مشوي" data-en="Mashawi">مشوي</h3>
-                        <p data-ar="تمكّنت من تحسين العمليات التشغيلية وزيادة الكفاءة في مطعم مشوي، مع التركيز على الجودة في تقديم الطعام وتجربة العميل، مما ساهم في تعزيز رضا العملاء." data-en="I was able to improve operational processes and increase efficiency at Mashawi restaurant, focusing on food quality and customer experience, which contributed to enhancing customer satisfaction.">تمكّنت من تحسين العمليات التشغيلية وزيادة الكفاءة في مطعم مشوي، مع التركيز على الجودة في تقديم الطعام وتجربة العميل، مما ساهم في تعزيز رضا العملاء.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="محاضر" data-en="Lecturer">محاضر</div>
-                        <h3 data-ar="مستر أكاديمي (تسويق المطاعم)" data-en="Mr. Academy (Restaurant Marketing)">مستر أكاديمي (تسويق المطاعم)</h3>
-                        <p data-ar="عملت كمحاضر لتدريس التسويق في مجال المطاعم، حيث نقلت خبرتي للطلاب والعاملين في القطاع، مع التركيز على استراتيجيات التسويق المتقدمة وأساليب الترويج الفعالة." data-en="I worked as a lecturer teaching marketing in the restaurant field, transferring my expertise to students and workers in the sector, with a focus on advanced marketing strategies and effective promotion methods.">عملت كمحاضر لتدريس التسويق في مجال المطاعم، حيث نقلت خبرتي للطلاب والعاملين في القطاع، مع التركيز على استراتيجيات التسويق المتقدمة وأساليب الترويج الفعالة.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="تشغيل وتسويق" data-en="Operations & Marketing">تشغيل وتسويق</div>
-                        <h3 data-ar="اكسبريس فرايد تشيكن - القاهرة" data-en="Express Fried Chicken - Cairo">اكسبريس فرايد تشيكن - القاهرة</h3>
-                        <p data-ar="قمت بإدارة العمليات التشغيلية والتسويقية لمطاعم اكسبريس فرايد تشيكن، مما ساعد في تعزيز الحضور السوقي للعلامة التجارية وزيادة قاعدة العملاء." data-en="I managed the operational and marketing activities for Express Fried Chicken restaurants, which helped strengthen the brand's market presence and increase the customer base.">قمت بإدارة العمليات التشغيلية والتسويقية لمطاعم اكسبريس فرايد تشيكن، مما ساعد في تعزيز الحضور السوقي للعلامة التجارية وزيادة قاعدة العملاء.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="مدير تسويق" data-en="Marketing Manager">مدير تسويق</div>
-                        <h3 data-ar="برستيج - 6 أكتوبر" data-en="Prestige - 6 October">برستيج - 6 أكتوبر</h3>
-                        <p data-ar="قمت بتطوير وتنفيذ استراتيجيات التسويق لمطعم برستيج في منطقة 6 أكتوبر، مما ساعد على تحسين الوعي بالعلامة التجارية وجذب عملاء جدد." data-en="I developed and implemented marketing strategies for Prestige restaurant in the 6 October area, which helped improve brand awareness and attract new customers.">قمت بتطوير وتنفيذ استراتيجيات التسويق لمطعم برستيج في منطقة 6 أكتوبر، مما ساعد على تحسين الوعي بالعلامة التجارية وجذب عملاء جدد.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="مدير تسويق فروع" data-en="Branch Marketing Manager">مدير تسويق فروع</div>
-                        <h3 data-ar="ميركاتو - القاهرة" data-en="Mercato - Cairo">ميركاتو - القاهرة</h3>
-                        <p data-ar="أشرفت على تنفيذ استراتيجيات التسويق لجميع فروع ميركاتو في القاهرة، مع التركيز على جذب العملاء وزيادة المبيعات من خلال حملات ترويجية مبتكرة." data-en="I supervised the implementation of marketing strategies for all Mercato branches in Cairo, focusing on attracting customers and increasing sales through innovative promotional campaigns.">أشرفت على تنفيذ استراتيجيات التسويق لجميع فروع ميركاتو في القاهرة، مع التركيز على جذب العملاء وزيادة المبيعات من خلال حملات ترويجية مبتكرة.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="مدير تشغيل وتطوير" data-en="Operations & Development Manager">مدير تشغيل وتطوير</div>
-                        <h3 data-ar="مؤسسة وجد - السعودية" data-en="Wajd Foundation - Saudi Arabia">مؤسسة وجد - السعودية</h3>
-                        <p data-ar="قمت بتطوير وتحسين العمليات التشغيلية لمجموعة من المطاعم في السعودية، بما في ذلك بيكو وحليبو وشيكي شكس وكروك وبرجر شاك. كان دوري يشمل تحسين تجربة العميل، وتطوير المنتجات، ومتابعة الأداء العام." data-en="I developed and improved the operational processes for a group of restaurants in Saudi Arabia, including Bico, Halibo, Shiki Shaks, Croc, and Burger Shack. My role included improving customer experience, product development, and monitoring overall performance.">قمت بتطوير وتحسين العمليات التشغيلية لمجموعة من المطاعم في السعودية، بما في ذلك بيكو وحليبو وشيكي شكس وكروك وبرجر شاك. كان دوري يشمل تحسين تجربة العميل، وتطوير المنتجات، ومتابعة الأداء العام.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date" data-ar="مدير تسويق" data-en="Marketing Manager">مدير تسويق</div>
-                        <h3 data-ar="شركة ارزو - المدينة المنورة، السعودية" data-en="Arzo Company - Medina, Saudi Arabia">شركة ارزو - المدينة المنورة، السعودية</h3>
-                        <p data-ar="قمت بإدارة التسويق لعلامات تجارية متعددة في شركة ارزو، بما في ذلك سلطة فاكتوري، ريزو، وآرزو، حيث ساهمت في تعزيز حضورها في السوق وزيادة حصتها السوقية." data-en="I managed marketing for multiple brands at Arzo Company, including Salad Factory, Rizo, and Arzo, where I contributed to strengthening their market presence and increasing market share.">قمت بإدارة التسويق لعلامات تجارية متعددة في شركة ارزو، بما في ذلك سلطة فاكتوري، ريزو، وآرزو، حيث ساهمت في تعزيز حضورها في السوق وزيادة حصتها السوقية.</p>
+                
+                <div class="about-image-container">
+                    <img src="./a.png" alt="باسم نصار في العمل" class="about-image">
+                    <div class="about-image-overlay">
+                        <h3 data-ar="خبرة عملية مباشرة" data-en="Hands-on Experience">خبرة عملية مباشرة</h3>
+                        <p data-ar="أكثر من 20 عامًا من الخبرة العملية في إدارة المطاعم" data-en="Over 20 years of hands-on experience in restaurant management">أكثر من 20 عامًا من الخبرة العملية في إدارة المطاعم</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
+    <!-- الخبرات المهنية -->
+  
+    <!-- الخبرات السابقة البارزة -->
+    <section id="previous-experience" class="section previous-experience">
         <div class="container">
-            <h2 data-ar="المهارات والخبرات" data-en="Skills & Expertise">المهارات والخبرات</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3><i class="fas fa-cogs"></i> <span data-ar="المهارات الإدارية" data-en="Administrative Skills">المهارات الإدارية</span></h3>
-                    <ul class="skills-list">
-                        <li data-ar="إدارة المطاعم والفنادق" data-en="Restaurant & Hotel Management">إدارة المطاعم والفنادق</li>
-                        <li data-ar="تطوير الاستراتيجيات التشغيلية" data-en="Developing Operational Strategies">تطوير الاستراتيجيات التشغيلية</li>
-                        <li data-ar="مراقبة الجودة وإدارة المخزون" data-en="Quality Control & Inventory Management">مراقبة الجودة وإدارة المخزون</li>
-                        <li data-ar="إدارة الموارد البشرية والرواتب" data-en="HR & Payroll Management">إدارة الموارد البشرية والرواتب</li>
-                        <li data-ar="التخطيط المالي والميزانيات" data-en="Financial Planning & Budgeting">التخطيط المالي والميزانيات</li>
-                        <li data-ar="إدارة الأزمات والمخاطر" data-en="Crisis & Risk Management">إدارة الأزمات والمخاطر</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-chart-line"></i> <span data-ar="المهارات التسويقية" data-en="Marketing Skills">المهارات التسويقية</span></h3>
-                    <ul class="skills-list">
-                        <li data-ar="تطوير استراتيجيات التسويق" data-en="Developing Marketing Strategies">تطوير استراتيجيات التسويق</li>
-                        <li data-ar="إدارة الحملات الترويجية" data-en="Managing Promotional Campaigns">إدارة الحملات الترويجية</li>
-                        <li data-ar="إدارة وسائل التواصل الاجتماعي" data-en="Social Media Management">إدارة وسائل التواصل الاجتماعي</li>
-                        <li data-ar="تحليل السوق والمنافسين" data-en="Market & Competitor Analysis">تحليل السوق والمنافسين</li>
-                        <li data-ar="بناء العلامات التجارية" data-en="Brand Building">بناء العلامات التجارية</li>
-                        <li data-ar="تخطيط وتنظيم الفعاليات" data-en="Event Planning & Organization">تخطيط وتنظيم الفعاليات</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-users"></i> <span data-ar="المهارات الشخصية" data-en="Personal Skills">المهارات الشخصية</span></h3>
-                    <ul class="skills-list">
-                        <li data-ar="خدمة العملاء والتواصل الفعال" data-en="Customer Service & Effective Communication">خدمة العملاء والتواصل الفعال</li>
-                        <li data-ar="القيادة وإدارة الفرق" data-en="Leadership & Team Management">القيادة وإدارة الفرق</li>
-                        <li data-ar="التدريب والتطوير" data-en="Training & Development">التدريب والتطوير</li>
-                        <li data-ar="العلاقات العامة" data-en="Public Relations">العلاقات العامة</li>
-                        <li data-ar="التفاوض والإقناع" data-en="Negotiation & Persuasion">التفاوض والإقناع</li>
-                        <li data-ar="العمل تحت الضغط" data-en="Working Under Pressure">العمل تحت الضغط</li>
-                    </ul>
-                </div>
+            <div class="section-title">
+                <h2 data-ar="الخبرات السابقة البارزة" data-en="Previous Key Experiences">الخبرات السابقة البارزة</h2>
+                <p data-ar="خبرات متنوعة في إدارة وتطوير المطاعم والعلامات التجارية" data-en="Diverse experiences in restaurant management and brand development">خبرات متنوعة في إدارة وتطوير المطاعم والعلامات التجارية</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section id="courses" class="courses">
-        <div class="container">
-            <h2 data-ar="الدورات والاستشارات" data-en="Courses & Consultations">الدورات والاستشارات</h2>
-            <div class="courses-grid">
-                <div class="course-card">
-                    <div class="course-icon">
-                        <i class="fas fa-video"></i>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-ar="كورس تسويق المطاعم المصور" data-en="Restaurant Marketing Video Course">كورس تسويق المطاعم المصور</h3>
-                        <p data-ar="كورس مصور كامل عن تسويق المطاعم يغطي جميع الجوانب الأساسية للتسويق الفعال في قطاع المطاعم." data-en="A complete video course on restaurant marketing covering all essential aspects of effective marketing in the restaurant sector.">كورس مصور كامل عن تسويق المطاعم يغطي جميع الجوانب الأساسية للتسويق الفعال في قطاع المطاعم.</p>
-                        <a href="https://www.emasteryacademy.com/courses/course?coursetitle=%3FHow_To_Market_Your_Restaurant&id=92" class="btn" target="_blank" data-ar="عرض الكورس" data-en="View Course">عرض الكورس</a>
-                    </div>
+                    <h3 data-ar="مساعد مدير مطعم دار القوات الجوية - القاهرة" data-en="Assistant Restaurant Manager - Air Force House, Cairo">مساعد مدير مطعم دار القوات الجوية - القاهرة</h3>
+                    <p data-ar="الإشراف على العمليات اليومية للمطعم، وضمان تقديم خدمة متميزة للعملاء، بالإضافة إلى تطوير الاستراتيجيات التشغيلية التي ساهمت في تحسين الأداء العام للمطعم." data-en="Supervision of daily restaurant operations, ensuring excellent customer service, and developing operational strategies that contributed to overall performance improvement.">الإشراف على العمليات اليومية للمطعم، وضمان تقديم خدمة متميزة للعملاء، بالإضافة إلى تطوير الاستراتيجيات التشغيلية التي ساهمت في تحسين الأداء العام للمطعم.</p>
                 </div>
-                <div class="course-card">
-                    <div class="course-icon">
-                        <i class="fas fa-headset"></i>
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-building"></i>
                     </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-ar="استشارات الحلول التسويقية" data-en="Marketing Solutions Consultations">استشارات الحلول التسويقية</h3>
-                        <p data-ar="أعمل كمستشار للحلول التسويقية عن طريق أكاديمية اونلاين لتقديم حلول تسويقية مبتكرة وفعالة." data-en="I work as a marketing solutions consultant through an online academy to provide innovative and effective marketing solutions.">أعمل كمستشار للحلول التسويقية عن طريق أكاديمية اونلاين لتقديم حلول تسويقية مبتكرة وفعالة.</p>
-                        <a href="https://www.emasteryacademy.com/advice/49" class="btn" target="_blank" data-ar="عرض الخدمات" data-en="View Services">عرض الخدمات</a>
-                    </div>
+                    <h3 data-ar="مدير مطعم تفانين - القاهرة" data-en="Restaurant Manager - Tafaneen, Cairo">مدير مطعم تفانين - القاهرة</h3>
+                    <p data-ar="إدارة وتشغيل مطعم تفانين، تحسين الأداء التشغيلي وتطوير استراتيجيات التسويق، مما ساعد في زيادة الإقبال على المطعم وتعزيز سمعة العلامة التجارية." data-en="Management and operation of Tafaneen restaurant, improving operational performance and developing marketing strategies, which helped increase restaurant traffic and enhance brand reputation.">إدارة وتشغيل مطعم تفانين، تحسين الأداء التشغيلي وتطوير استراتيجيات التسويق، مما ساعد في زيادة الإقبال على المطعم وتعزيز سمعة العلامة التجارية.</p>
                 </div>
-                <div class="course-card">
-                    <div class="course-icon">
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 data-ar="مدير مطعم مشوي" data-en="Restaurant Manager - Mashawy">مدير مطعم مشوي</h3>
+                    <p data-ar="تحسين العمليات التشغيلية وزيادة الكفاءة في مطعم مشوي، مع التركيز على الجودة في تقديم الطعام وتجربة العميل، مما ساهم في تعزيز رضا العملاء." data-en="Improving operational processes and increasing efficiency at Mashawy restaurant, with focus on food quality and customer experience, contributing to enhanced customer satisfaction.">تحسين العمليات التشغيلية وزيادة الكفاءة في مطعم مشوي، مع التركيز على الجودة في تقديم الطعام وتجربة العميل، مما ساهم في تعزيز رضا العملاء.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
-                    <div class="course-content">
-                        <h3 class="course-title" data-ar="تدريب العاملين في المطاعم" data-en="Restaurant Staff Training">تدريب العاملين في المطاعم</h3>
-                        <p data-ar="برامج تدريبية متخصصة للعاملين في قطاع المطاعم لتحسين الخدمة وزيادة الإنتاجية." data-en="Specialized training programs for restaurant sector workers to improve service and increase productivity.">برامج تدريبية متخصصة للعاملين في قطاع المطاعم لتحسين الخدمة وزيادة الإنتاجية.</p>
-                        <a href="#contact" class="btn" data-ar="اطلب خدمة التدريب" data-en="Request Training Service">اطلب خدمة التدريب</a>
+                    <h3 data-ar="محاضر بمستر أكاديمي (تسويق المطاعم)" data-en="Lecturer - Master Academy (Restaurant Marketing)">محاضر بمستر أكاديمي (تسويق المطاعم)</h3>
+                    <p data-ar="التدريس في مجال تسويق المطاعم، نقل الخبرة للطلاب والعاملين في القطاع، مع التركيز على استراتيجيات التسويق المتقدمة وأساليب الترويج الفعالة." data-en="Teaching restaurant marketing, transferring expertise to students and industry professionals, focusing on advanced marketing strategies and effective promotional methods.">التدريس في مجال تسويق المطاعم، نقل الخبرة للطلاب والعاملين في القطاع، مع التركيز على استراتيجيات التسويق المتقدمة وأساليب الترويج الفعالة.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-utensils"></i>
                     </div>
+                    <h3 data-ar="تشغيل وتسويق اكسبريس فرايد تشيكن - القاهرة" data-en="Operation & Marketing - Express Fried Chicken, Cairo">تشغيل وتسويق اكسبريس فرايد تشيكن - القاهرة</h3>
+                    <p data-ar="إدارة العمليات التشغيلية والتسويقية لمطاعم اكسبريس فرايد تشيكن، مما ساعد في تعزيز الحضور السوقي للعلامة التجارية وزيادة قاعدة العملاء." data-en="Management of operational and marketing activities for Express Fried Chicken restaurants, helping to strengthen brand market presence and increase customer base.">إدارة العمليات التشغيلية والتسويقية لمطاعم اكسبريس فرايد تشيكن، مما ساعد في تعزيز الحضور السوقي للعلامة التجارية وزيادة قاعدة العملاء.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 data-ar="مدير تسويق برستيج - 6 أكتوبر" data-en="Marketing Manager - Prestige, 6 October">مدير تسويق برستيج - 6 أكتوبر</h3>
+                    <p data-ar="تطوير وتنفيذ استراتيجيات التسويق لمطعم برستيج في منطقة 6 أكتوبر، مما ساعد على تحسين الوعي بالعلامة التجارية وجذب عملاء جدد." data-en="Development and implementation of marketing strategies for Prestige restaurant in 6 October City, helping to improve brand awareness and attract new customers.">تطوير وتنفيذ استراتيجيات التسويق لمطعم برستيج في منطقة 6 أكتوبر، مما ساعد على تحسين الوعي بالعلامة التجارية وجذب عملاء جدد.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 data-ar="مدير تسويق فروع ميركاتو - القاهرة" data-en="Marketing Manager - Mercato Branches, Cairo">مدير تسويق فروع ميركاتو - القاهرة</h3>
+                    <p data-ar="الإشراف على تنفيذ استراتيجيات التسويق لجميع فروع ميركاتو في القاهرة، مع التركيز على جذب العملاء وزيادة المبيعات من خلال حملات ترويجية مبتكرة." data-en="Supervision of marketing strategy implementation for all Mercato branches in Cairo, focusing on attracting customers and increasing sales through innovative promotional campaigns.">الإشراف على تنفيذ استراتيجيات التسويق لجميع فروع ميركاتو في القاهرة، مع التركيز على جذب العملاء وزيادة المبيعات من خلال حملات ترويجية مبتكرة.</p>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 data-ar="مدير تشغيل وتطوير لمؤسسة وجد - السعودية" data-en="Operations & Development Manager - Wajd Foundation, Saudi Arabia">مدير تشغيل وتطوير لمؤسسة وجد - السعودية</h3>
+                    <p data-ar="تطوير وتحسين العمليات التشغيلية لمجموعة من المطاعم في السعودية (بيكو - حليبو - شيكي شكس - كروك - برجر شاك). تحسين تجربة العميل، وتطوير المنتجات، ومتابعة الأداء العام." data-en="Development and improvement of operational processes for a group of restaurants in Saudi Arabia (Beko - Halibo - Shicky Shakes - Croc - Burger Shak). Improving customer experience, product development, and overall performance monitoring.">تطوير وتحسين العمليات التشغيلية لمجموعة من المطاعم في السعودية (بيكو - حليبو - شيكي شكس - كروك - برجر شاك). تحسين تجربة العميل، وتطوير المنتجات، ومتابعة الأداء العام.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- معرض أماكن العمل -->
+<section id="workplaces" class="section workplaces">
+    <div class="container">
+        <div class="section-title">
+            <h2 data-ar="أماكن العمل" data-en="Workplaces">أماكن العمل</h2>
+            <p data-ar="صور حصرية للأماكن التي عملت فيها وتطورت خلال مسيرتي المهنية" data-en="Exclusive photos of the places where I worked and grew throughout my career">صور حصرية للأماكن التي عملت فيها وتطورت خلال مسيرتي المهنية</p>
+        </div>
+        <div class="workplaces-gallery">
+            <div class="gallery-grid">
+                <!-- صورة 1 -->
+          <div class="gallery-item">
+    <div class="gallery-image-container">
+        <img src="./2.jpeg" alt="برجر شاك - القاهرة" class="gallery-image">
+        <div class="gallery-overlay">
+            <div class="gallery-text">
+                <h3 data-ar="برجر شاك" data-en="Burger Shack">برجر شاك</h3>
+                <p data-ar="مؤسسة وجد مدير تشغيل وتطوير " data-en="Assistant Restaurant Manager">مؤسسة وجد مدير تشغيل وتطوير </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <!-- صورة 2 -->
+                <div class="gallery-item">
+                    <div class="gallery-image-container">
+                        <img src="./3.jpeg" alt="مطعم تفانين - القاهرة" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-text">
+                                <h3 data-ar="كروك" data-en="KROCK">كروك</h3>
+                                <p data-ar="مدير تشغيل وتطوير " data-en="Marketing Manager">مدير تشغيل وتطوير  </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- صورة 3 -->
+                <div class="gallery-item">
+                    <div class="gallery-image-container">
+                        <img src="./4.jpeg" alt="مطعم مشوي" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-text">
+                                <h3 data-ar="بيكو" data-en="Piko">بيكو</h3>
+                                <p data-ar="مدير تشغيل وتطوير " data-en="Marketing Manager">مدير تشغيل وتطوير  </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- صورة 4 -->
+                <div class="gallery-item">
+                    <div class="gallery-image-container">
+                        <img src="./5.jpeg" alt="مستر أكاديمي" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-text">
+                                <h3 data-ar="ريزو" data-en="Rezo">ريزو</h3>
+                                <p data-ar="مدير تسويق" data-en="Marketing Manager">مدير تسويق</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- صورة 5 -->
+                <div class="gallery-item">
+                    <div class="gallery-image-container">
+                        <img src="./6.jpeg" alt="اكسبريس" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-text">
+                                <h3 data-ar="اكسبريس" data-en="Express">اكسبريس</h3>
+                                <p data-ar="تشغيل وتسويق" data-en="Operation & Marketing">مدير تشغيل وتطوير </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- صورة 6 -->
+                <div class="gallery-item">
+                    <div class="gallery-image-container">
+                        <img src="./7.jpeg" alt="مطعم برستيج - 6 أكتوبر" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-text">
+                                <h3 data-ar="حليبو" data-en="Halibo">حليبو</h3>
+                                <p data-ar="مدير تشغيل" data-en="Operations Manager"> مدير تشغيل</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- صورة 7 -->
+                <div class="gallery-item">
+                    <div class="gallery-image-container">
+                        <img src="./8.jpeg" alt="ميركاتو - القاهرة" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-text">
+                                <h3 data-ar="بريستيج" data-en="Prestige">Prestige</h3>
+                                <p data-ar="مدير تسويق" data-en="Marketing Manager">مدير تسويق </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- صورة 8 -->
+                <div class="gallery-item">
+                    <div class="gallery-image-container">
+                        <img src="./9.jpeg" alt="مؤسسة وجد - السعودية" class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-text">
+                                <h3 data-ar="شيكي شكي" data-en="SHAKY SHAKES">شيكي شكي </h3>
+                                <p data-ar="مدير تشغيل وتطوير" data-en="Operations & Development Manager">مدير تشغيل وتطوير</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- المهارات -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-ar="المهارات المتخصصة" data-en="Specialized Skills">المهارات المتخصصة</h2>
+                <p data-ar="مجموعة واسعة من المهارات والخبرات المكتسبة على مدى 20 عامًا" data-en="A wide range of skills and expertise acquired over 20 years">مجموعة واسعة من المهارات والخبرات المكتسبة على مدى 20 عامًا</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line"></i> <span data-ar="الإدارية والقيادية" data-en="Management & Leadership">الإدارية والقيادية</span></h3>
+                    <ul>
+                        <li data-ar="القيادة الاستراتيجية" data-en="Strategic Leadership">القيادة الاستراتيجية</li>
+                        <li data-ar="التخطيط الاستراتيجي" data-en="Strategic Planning">التخطيط الاستراتيجي</li>
+                        <li data-ar="إدارة الموارد البشرية" data-en="HR Management">إدارة الموارد البشرية</li>
+                        <li data-ar="إدارة الميزانيات والتمويل" data-en="Budget & Finance Management">إدارة الميزانيات والتمويل</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-bullhorn"></i> <span data-ar="التسويق والعلامة التجارية" data-en="Marketing & Branding">التسويق والعلامة التجارية</span></h3>
+                    <ul>
+                        <li data-ar="التسويق الرقمي" data-en="Digital Marketing">التسويق الرقمي</li>
+                        <li data-ar="بناء العلامة التجارية" data-en="Brand Building">بناء العلامة التجارية</li>
+                        <li data-ar="إدارة وسائل التواصل الاجتماعي" data-en="Social Media Management">إدارة وسائل التواصل الاجتماعي</li>
+                        <li data-ar="العلاقات العامة" data-en="Public Relations">العلاقات العامة</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> <span data-ar="التشغيلية والفنية" data-en="Operational & Technical">التشغيلية والفنية</span></h3>
+                    <ul>
+                        <li data-ar="إدارة العمليات التشغيلية" data-en="Operations Management">إدارة العمليات التشغيلية</li>
+                        <li data-ar="مراقبة الجودة الشاملة" data-en="Total Quality Control">مراقبة الجودة الشاملة</li>
+                        <li data-ar="إدارة المخزون والمشتريات" data-en="Inventory & Purchasing Management">إدارة المخزون والمشتريات</li>
+                        <li data-ar="الأمن الغذائي والصحة" data-en="Food Safety & Health">الأمن الغذائي والصحة</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Vision Section -->
-    <section id="vision" class="vision">
+    <!-- المشاريع -->
+    <section id="projects" class="section projects">
         <div class="container">
-            <div class="vision-content">
-                <h2 data-ar="رؤيتي" data-en="My Vision">رؤيتي</h2>
-                <p data-ar="رؤيتي تكمن في استخدام خبرتي الواسعة والمتنوعة لتطوير وتحقيق التميز في مجال المطاعم بشكل عام. أسعى دائمًا إلى دمج الابتكار والجودة مع تقديم حلول فعالة ومرنة لاحتياجات الشركات والأفراد في هذا القطاع." data-en="My vision lies in using my extensive and diverse experience to develop and achieve excellence in the restaurant field in general. I always strive to combine innovation and quality with providing effective and flexible solutions for the needs of companies and individuals in this sector.">رؤيتي تكمن في استخدام خبرتي الواسعة والمتنوعة لتطوير وتحقيق التميز في مجال المطاعم بشكل عام. أسعى دائمًا إلى دمج الابتكار والجودة مع تقديم حلول فعالة ومرنة لاحتياجات الشركات والأفراد في هذا القطاع.</p>
-                <p data-ar="أطمح إلى أن أكون رائدًا في مجالي، وأن أساهم في بناء شركات قوية ومبتكرة تهدف إلى تقديم أفضل الخدمات للعملاء مع الحفاظ على أعلى معايير الجودة." data-en="I aspire to be a leader in my field and contribute to building strong and innovative companies that aim to provide the best services to customers while maintaining the highest quality standards.">أطمح إلى أن أكون رائدًا في مجالي، وأن أساهم في بناء شركات قوية ومبتكرة تهدف إلى تقديم أفضل الخدمات للعملاء مع الحفاظ على أعلى معايير الجودة.</p>
-                <p data-ar="أؤمن بأن النجاح يأتي من التفوق في التفاصيل، وأن القيادة الفعّالة تتطلب القدرة على التكيف مع التحديات المستمرة وتحقيق الأهداف بأعلى مستوى من الاحترافية." data-en="I believe that success comes from excellence in details, and that effective leadership requires the ability to adapt to ongoing challenges and achieve goals with the highest level of professionalism.">أؤمن بأن النجاح يأتي من التفوق في التفاصيل، وأن القيادة الفعّالة تتطلب القدرة على التكيف مع التحديات المستمرة وتحقيق الأهداف بأعلى مستوى من الاحترافية.</p>
-                <p data-ar="هدفي هو تقديم قيمة حقيقية في كل جانب من جوانب الأعمال التي أشارك فيها، وتعزيز بيئة العمل الإيجابية التي تشجع على النمو والتطور المستدام." data-en="My goal is to provide real value in every aspect of the businesses I participate in, and to foster a positive work environment that encourages sustainable growth and development.">هدفي هو تقديم قيمة حقيقية في كل جانب من جوانب الأعمال التي أشارك فيها، وتعزيز بيئة العمل الإيجابية التي تشجع على النمو والتطور المستدام.</p>
+            <div class="section-title">
+                <h2 data-ar="المشاريع والإنجازات" data-en="Achievements"> الإنجازات</h2>
+                <p data-ar="أبرز المشاريع والإنجازات التي قدمتها خلال مسيرتي المهنية" data-en="The most prominent projects and achievements throughout my career">أبرز المشاريع والإنجازات التي قدمتها خلال مسيرتي المهنية</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 data-ar="دورة تسويق المطاعم المتكاملة" data-en="Comprehensive Restaurant Marketing Course">دورة تسويق المطاعم المتكاملة</h3>
+                    <p data-ar="تطوير دورة متكاملة عن تسويق المطاعم عبر الإنترنت مع أكثر من 500 متدرب وتقييم 4.8/5." data-en="Development of a comprehensive online restaurant marketing course with over 500 trainees and 4.8/5 rating.">تطوير دورة متكاملة عن تسويق المطاعم عبر الإنترنت مع أكثر من 500 متدرب وتقييم 4.8/5.</p>
+                    <a href="https://www.emasteryacademy.com/courses/course?coursetitle=%3FHow_To_Market_Your_Restaurant&id=92" target="_blank" class="project-link" data-ar="عرض الدورة" data-en="View Course">
+                        <span>عرض الدورة</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 data-ar="الاستشارات التسويقية المتخصصة" data-en="Specialized Marketing Consultations">الاستشارات التسويقية المتخصصة</h3>
+                    <p data-ar="تقديم استشارات متخصصة عبر أكاديمية إم ماستري مع مساعدة أكثر من 50 عميلًا." data-en="Providing specialized consultations via Emastery Academy, assisting over 50 clients.">تقديم استشارات متخصصة عبر أكاديمية إم ماستري مع مساعدة أكثر من 50 عميلًا.</p>
+                    <a href="https://www.emasteryacademy.com/advice/49" target="_blank" class="project-link" data-ar="صفحة الاستشارات" data-en="Consultation Page">
+                        <span>صفحة الاستشارات</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-trademark"></i>
+                    </div>
+                    <h3 data-ar="تطوير العلامات التجارية" data-en="Brand Development">تطوير العلامات التجارية</h3>
+                    <p data-ar="إطلاق وتطوير 8 علامات تجارية مختلفة في قطاع المطاعم والمقاهي." data-en="Launch and development of 8 different brands in the restaurant and café sector.">إطلاق وتطوير 8 علامات تجارية مختلفة في قطاع المطاعم والمقاهي.</p>
+                    <a href="#" class="project-link" data-ar="عرض التفاصيل" data-en="View Details">
+                        <span>عرض التفاصيل</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- التواصل -->
+    <section id="contact" class="section contact">
         <div class="container">
-            <h2 data-ar="اتصل بي" data-en="Contact Me">اتصل بي</h2>
-            <div class="contact-container">
+            <div class="section-title">
+                <h2 data-ar="تواصل معي" data-en="Contact Me">تواصل معي</h2>
+                <p data-ar="لا تتردد في التواصل معي لمناقشة أي مشروع أو استشارة" data-en="Feel free to contact me to discuss any project or consultation">لا تتردد في التواصل معي لمناقشة أي مشروع أو استشارة</p>
+            </div>
+            <div class="contact-content">
                 <div class="contact-info">
-                    <h3 data-ar="لنتواصل" data-en="Let's Connect">لنتواصل</h3>
-                    <p data-ar="أنا دائماً متاح للاستشارات والمشاريع الجديدة. لا تتردد في التواصل معي لأي استفسار أو لبدء مشروع جديد." data-en="I am always available for consultations and new projects. Feel free to contact me for any inquiries or to start a new project.">أنا دائماً متاح للاستشارات والمشاريع الجديدة. لا تتردد في التواصل معي لأي استفسار أو لبدء مشروع جديد.</p>
-
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4 data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</h4>
-                                <p>BassemNassar007@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4 data-ar="الهاتف" data-en="Phone">الهاتف</h4>
-                                <p>0096539656760 / 00201551544871</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4 data-ar="الموقع" data-en="Location">الموقع</h4>
-                                <p data-ar="القاهرة، مصر" data-en="Cairo, Egypt">القاهرة، مصر</p>
-                            </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3 data-ar="الهاتف / واتساب" data-en="Phone / WhatsApp">الهاتف / واتساب</h3>
+                            <p>+965 3965 6760</p>
+                            <p>+20 155 154 4871</p>
                         </div>
                     </div>
-
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/share/19z5tX52Mf/" class="social-link" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h3>Instagram</h3>
+                            <a href="https://www.instagram.com/bassemmojaddedi" target="_blank">@bassemmojaddedi</a>
+                        </div>
                     </div>
-                </div>
-
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="الاسم الكامل" data-ar-placeholder="الاسم الكامل" data-en-placeholder="Full Name" required>
+                    <div class="contact-item">
+                        <i class="fab fa-facebook"></i>
+                        <div>
+                            <h3>Facebook</h3>
+                            <a href="https://www.facebook.com/share/19z5tX52Mf" target="_blank">باسم نصار للاستشارات</a>
                         </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="البريد الإلكتروني" data-ar-placeholder="البريد الإلكتروني" data-en-placeholder="Email Address" required>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h3 data-ar="الموقع الإلكتروني" data-en="Website">الموقع الإلكتروني</h3>
+                            <a href="https://www.emasteryacademy.com" target="_blank">Emastery Academy</a>
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="الموضوع" data-ar-placeholder="الموضوع" data-en-placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="الرسالة" data-ar-placeholder="الرسالة" data-en-placeholder="Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn" data-ar="إرسال الرسالة" data-en="Send Message">إرسال الرسالة</button>
-                    </form>
-                </div>
+                    </div>
+               
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- التذييل -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <h3 data-ar="باسم نصار" data-en="Bassem Nassar">باسم نصار</h3>
-                <p data-ar="خبير في الإدارة والتسويق وتطوير المنشآت" data-en="Expert in Management, Marketing & Business Development">خبير في الإدارة والتسويق وتطوير المنشآت</p>
-            </div>
-            <div class="copyright">
-                <p data-ar="© 2023 جميع الحقوق محفوظة | تم التصميم بتقنيات حديثة" data-en="© 2023 All Rights Reserved | Designed with Modern Technologies">© 2023 جميع الحقوق محفوظة | تم التصميم بتقنيات حديثة</p>
+                <p class="footer-text" data-ar="خبير إدارة وتطوير المطاعم مع أكثر من 20 عامًا من الخبرة. تواصل معي لتحويل فكرتك إلى مشروع ناجح." data-en="Restaurant management and development expert with over 20 years of experience. Contact me to transform your idea into a successful project.">خبير إدارة وتطوير المطاعم مع أكثر من 20 عامًا من الخبرة. تواصل معي لتحويل فكرتك إلى مشروع ناجح.</p>
+                <p class="footer-text" data-ar="© 2023 باسم نصار. جميع الحقوق محفوظة." data-en="© 2023 Bassem Nassar. All rights reserved.">© 2023 باسم نصار. جميع الحقوق محفوظة.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/bassemmojaddedi" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/19z5tX52Mf" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.emasteryacademy.com" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
+                    <a href="tel:+96539656760" title="Phone"><i class="fas fa-phone"></i></a>
+                    <a href="#" class="back-to-top" id="backToTop" title="Back to Top"><i class="fas fa-arrow-up"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/96539656760?text=مرحباً%20باسم%20نصار%20،%20أرغب%20في%20الحصول%20على%20استشارة"
-        class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip" data-ar="تواصل معي عبر واتساب" data-en="Contact me via WhatsApp">تواصل معي عبر واتساب</span>
-    </a>
-
-    <!-- Scroll to Top Button -->
-    <div class="scroll-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </div>
-
+    <!-- JavaScript -->
     <script>
-        // Language Toggle
-        const languageToggle = document.getElementById('languageToggle');
-        const body = document.body;
-        let isEnglish = false;
+        // DOM Elements
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const navLinksItems = document.querySelectorAll('.nav-link');
+        const langToggle = document.getElementById('langToggle');
+        const langText = document.getElementById('langText');
+        const backToTop = document.getElementById('backToTop');
+        const contactForm = document.getElementById('contactForm');
+        const navbar = document.getElementById('navbar');
+        const loading = document.getElementById('loading');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        const timelineItems = document.querySelectorAll('.timeline-item');
 
-        languageToggle.addEventListener('click', function() {
-            isEnglish = !isEnglish;
+        // Current language state (true for Arabic, false for English)
+        let currentLang = true;
+        let isScrolling = false;
+
+        // Show notification
+        function showNotification(message, duration = 3000) {
+            notificationText.textContent = message;
+            notification.classList.add('show');
             
-            if (isEnglish) {
-                body.classList.add('english');
-                languageToggle.querySelector('span').textContent = 'العربية';
-                updateContent('en');
-            } else {
-                body.classList.remove('english');
-                languageToggle.querySelector('span').textContent = 'English';
-                updateContent('ar');
-            }
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, duration);
+        }
+
+        // Hide loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loading.classList.add('hidden');
+            }, 500);
         });
 
-        function updateContent(lang) {
-            // Update all elements with data attributes
-            document.querySelectorAll('[data-ar], [data-en]').forEach(element => {
-                if (element.hasAttribute(`data-${lang}`)) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = element.getAttribute(`data-${lang}-placeholder`);
-                    } else {
-                        element.textContent = element.getAttribute(`data-${lang}`);
-                    }
+        // Toggle mobile menu
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Update active nav link on scroll
+        function updateActiveNavLink() {
+            if (isScrolling) return;
+            
+            const scrollPosition = window.scrollY + 100;
+            const sections = document.querySelectorAll('section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinksItems.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
                 }
             });
         }
 
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function () {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
         // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const navbar = document.getElementById('navbar');
+        function handleNavbarScroll() {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-
-            // Show/hide scroll to top button
-            const scrollToTopBtn = document.querySelector('.scroll-to-top');
-            if (window.scrollY > 300) {
-                scrollToTopBtn.classList.add('active');
-            } else {
-                scrollToTopBtn.classList.remove('active');
-            }
-        });
-
-        // Create particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random properties
-                const size = Math.random() * 20 + 5;
-                const left = Math.random() * 100;
-                const animationDuration = Math.random() * 20 + 10;
-                const animationDelay = Math.random() * 5;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${left}%`;
-                particle.style.animationDuration = `${animationDuration}s`;
-                particle.style.animationDelay = `${animationDelay}s`;
-                
-                particlesContainer.appendChild(particle);
-            }
+            updateActiveNavLink();
         }
 
-        // Initialize particles
-        createParticles();
+        // Toggle language function
+        function toggleLanguage() {
+            currentLang = !currentLang;
+            
+            // Update button text
+            langText.textContent = currentLang ? 'EN' : 'AR';
+            
+            // Update direction and language attribute
+            document.documentElement.dir = currentLang ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang ? 'ar' : 'en';
+            
+            // Update all text elements
+            updateAllTextElements();
+            
+            // Show notification
+            const message = currentLang 
+                ? 'تم تغيير اللغة إلى العربية' 
+                : 'Language changed to English';
+            showNotification(message);
+        }
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function (entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        // Function to update all text elements
+        function updateAllTextElements() {
+            // Update navigation links
+            const navLinks = document.querySelectorAll('.nav-link[data-ar][data-en]');
+            navLinks.forEach(link => {
+                link.textContent = currentLang ? link.getAttribute('data-ar') : link.getAttribute('data-en');
+            });
+            
+            // Update hero section
+            const heroTitle = document.getElementById('heroTitle');
+            const heroSubtitle = document.getElementById('heroSubtitle');
+            const heroDescription = document.getElementById('heroDescription');
+            
+            if (heroTitle) {
+                heroTitle.textContent = currentLang ? heroTitle.getAttribute('data-ar') : heroTitle.getAttribute('data-en');
+            }
+            
+            if (heroSubtitle) {
+                heroSubtitle.textContent = currentLang ? heroSubtitle.getAttribute('data-ar') : heroSubtitle.getAttribute('data-en');
+            }
+            
+            if (heroDescription) {
+                heroDescription.textContent = currentLang ? heroDescription.getAttribute('data-ar') : heroDescription.getAttribute('data-en');
+            }
+            
+            // Update hero buttons
+            const contactBtnSpan = document.querySelector('#contactBtn span');
+            const projectsBtnSpan = document.querySelector('#projectsBtn span');
+            
+            if (contactBtnSpan) {
+                contactBtnSpan.textContent = currentLang ? contactBtnSpan.getAttribute('data-ar') : contactBtnSpan.getAttribute('data-en');
+            }
+            
+            if (projectsBtnSpan) {
+                projectsBtnSpan.textContent = currentLang ? projectsBtnSpan.getAttribute('data-ar') : projectsBtnSpan.getAttribute('data-en');
+            }
+            
+            // Update all other elements with translation data
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                if (!element.closest('button') && !element.closest('.lang-switch')) {
+                    element.textContent = currentLang ? element.getAttribute('data-ar') : element.getAttribute('data-en');
                 }
             });
-        }, observerOptions);
+        }
 
-        // Observe elements for animation
-        document.querySelectorAll('.about-text, .about-image, .timeline-item, .skill-category, .course-card, .vision-content, .contact-info, .contact-form').forEach(el => {
-            observer.observe(el);
+        // Initialize language toggle
+        langToggle.addEventListener('click', toggleLanguage);
+
+        // Back to top button
+        window.addEventListener('scroll', () => {
+            handleNavbarScroll();
+            
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
         });
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
+        backToTop.addEventListener('click', (e) => {
             e.preventDefault();
-            const message = isEnglish ? 
-                'Thank you for your message! I will get back to you as soon as possible.' : 
-                'شكراً لتواصلك! سأرد عليك في أقرب وقت ممكن.';
-            alert(message);
-            this.reset();
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-
-                    // Close mobile menu if open
-                    document.querySelector('.nav-links').classList.remove('active');
-                }
-            });
-        });
-
-        // Scroll to top functionality
-        document.querySelector('.scroll-to-top').addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
+
+        // Form submission
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !subject || !message) {
+                showNotification(currentLang 
+                    ? 'يرجى ملء جميع الحقول المطلوبة' 
+                    : 'Please fill in all required fields', 3000);
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification(currentLang 
+                    ? 'يرجى إدخال بريد إلكتروني صحيح' 
+                    : 'Please enter a valid email address', 3000);
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = currentLang 
+                ? '<i class="fas fa-spinner fa-spin"></i><span>جاري الإرسال...</span>' 
+                : '<i class="fas fa-spinner fa-spin"></i><span>Sending...</span>';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                const successMessage = currentLang 
+                    ? `شكرًا ${name}، تم استلام رسالتك وسيتم الرد عليك خلال 24 ساعة!` 
+                    : `Thank you ${name}, your message has been received and we'll respond within 24 hours!`;
+                
+                showNotification(successMessage, 5000);
+                
+                contactForm.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    isScrolling = true;
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    setTimeout(() => {
+                        isScrolling = false;
+                        updateActiveNavLink();
+                    }, 1000);
+                }
+            });
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            handleNavbarScroll();
+            
+            // Add click outside to close mobile menu
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
     </script>
 </body>
-
 </html>
